@@ -1433,11 +1433,24 @@ code[class*="language-plaintext"] {
   @include external-link;
 }
 
-// External link - Safari only fix
+// External link - Safari-only icon display fix to prevent icon line break and mask display bug
 @media not all and (min-resolution:.001dpcm) { 
   @supports (-webkit-appearance:none) and (stroke-color:transparent) {
-    #{$external-href}::after {
+    html {
+      font-feature-settings: normal;
+    }
+
+    #{$external-href} {      
       display: inline-block;
+      padding-right: 2.5ex;
+
+      &::after {
+        display: inline-block;
+        margin-left: 0;
+        margin-right: -2.5ex;
+        padding-left: 2.5ex;
+        -webkit-mask-position-x: .5ex;
+      }
     }
   }
 }
